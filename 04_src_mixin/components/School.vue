@@ -1,0 +1,30 @@
+<template>
+  <div class="school">
+    <h2 @click="showName">学校名称：{{name}}</h2>
+    <h2>学校地址：{{ address }}</h2>
+  </div>
+</template>
+
+<script>
+import {mixin, hunhe }  from '../mixin'
+export default {
+  name: "School",
+  data() {
+    return {
+      name: "极客堂",
+      address: "北京",
+    };
+  },
+  mounted() {
+    console.log('你好啊！！！！')
+  },
+  mixins: [mixin, hunhe]
+
+};
+</script>
+
+<style>
+.school {
+  background-color: cornflowerblue;
+}
+</style>
