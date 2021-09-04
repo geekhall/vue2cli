@@ -1,7 +1,7 @@
 <template>
   <div>
-    <MyHeader :addTodo="addTodo"></MyHeader>
-    <MyList :todos="todos"></MyList>
+    <MyHeader :addTodo="addTodo" ></MyHeader>
+    <MyList :todos="todos" :checkTodo="checkTodo"></MyList>
     <MyFooter></MyFooter>
   </div>
 </template>
@@ -27,6 +27,12 @@ export default {
     addTodo(todoObj){
       // console.log('我是app组件，我收到了数据', todoObj)
       this.todos.unshift(todoObj)
+    },
+    // 勾选或者取消选择
+    checkTodo(id){
+      this.todos.forEach((todo)=>{
+        if (todo.id === id) todo.done = !todo.done 
+      })
     }
   },
   components: {

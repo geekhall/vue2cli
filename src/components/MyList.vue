@@ -1,8 +1,13 @@
 <template>
   <div>
     <ul>
-      <MyItem v-for="todoObj in todos" :key="todoObj.id" :todo="todoObj"/>
-    </ul>    
+      <MyItem
+        v-for="todoObj in todos"
+        :key="todoObj.id"
+        :todo="todoObj"
+        :checkTodo="checkTodo"
+      />
+    </ul>
   </div>
 </template>
 
@@ -12,21 +17,21 @@ import MyItem from "./MyItem";
 export default {
   name: "MyList",
   components: {
-    MyItem
+    MyItem,
   },
-  props: ['todos']
+  props: ["todos", "checkTodo"],
 };
 </script>
 
 <style scoped>
-.todo-main{
+.todo-main {
   margin-left: 0px;
   border: 1px solid #ddd;
   border-radius: 2px;
   padding: 0px;
 }
 
-.todo-empty{
+.todo-empty {
   height: 40px;
   line-height: 40px;
   border: 1px solid #ddd;
