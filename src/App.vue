@@ -1,7 +1,7 @@
 <template>
   <div>
     <MyHeader :addTodo="addTodo" ></MyHeader>
-    <MyList :todos="todos" :checkTodo="checkTodo"></MyList>
+    <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"></MyList>
     <MyFooter></MyFooter>
   </div>
 </template>
@@ -33,6 +33,15 @@ export default {
       this.todos.forEach((todo)=>{
         if (todo.id === id) todo.done = !todo.done 
       })
+    },
+    // 删除一个Todo
+    // deleteTodo(id){
+    //   this.todos = this.todos.filter((todo)=>{
+    //     return todo.id !== id
+    //   })
+    // }
+    deleteTodo(id){
+      this.todos = this.todos.filter(todo => todo.id !== id)
     }
   },
   components: {

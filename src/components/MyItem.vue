@@ -5,7 +5,7 @@
       <!-- <input type="checkbox" v-model="todo.done"/> -->
       <span>{{todo.title}}</span>
     </label>
-    <button class="btn btn-danger">删除</button>
+    <button class="btn btn-danger" @click="handleDelete(todo.id)">删除</button>
   </li>
 </template>
 
@@ -13,7 +13,7 @@
 export default {
   name: "MyItem",
   // 声明接收todo对象
-  props: ['todo', 'checkTodo'],
+  props: ['todo', 'checkTodo', 'deleteTodo'],
   mounted () {
     console.log(this.todo)
   },
@@ -22,8 +22,15 @@ export default {
       // console.log(id)
       // 通知App组件将对应的todo的done值取反
       this.checkTodo(id)
-    
+    },
+    handleDelete(id){
+      if ( confirm('确定删除吗？')){
+        // 
+        console.log(id)
+        this.deleteTodo(id)
+      }
     }
+
   }
 };
 </script>
