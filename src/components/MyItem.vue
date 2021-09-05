@@ -2,9 +2,10 @@
   <li>
     <label>
       <input type="checkbox" :checked="todo.done" @change="handleCheck(todo.id)"/>
+      <!-- <input type="checkbox" v-model="todo.done"/> -->
       <span>{{todo.title}}</span>
     </label>
-    <button class="btn btn-danger" style="display: none">删除</button>
+    <button class="btn btn-danger">删除</button>
   </li>
 </template>
 
@@ -59,5 +60,13 @@ li:before {
 
 li:last-child {
   border-bottom: none;
+}
+
+li:hover {
+  background-color: #ddd;
+}
+
+li:hover button {
+  display: block;
 }
 </style>
