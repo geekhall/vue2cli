@@ -1,21 +1,140 @@
 <template>
   <div>
-      <School></School>
-      <hr>
-      <Student></Student>
+    <MyHeader :addTodo="addTodo" ></MyHeader>
+    <MyList :todos="todos"></MyList>
+    <MyFooter :todos="todos" :checkAllTodo="checkAllTodo" :clearAllDoneTodo="clearAllDoneTodo"></MyFooter>
   </div>
 </template>
 
 <script>
 // 引入School组件
-import School  from './components/School'
-import Student from './components/Student'
+import MyFooter from "./components/MyFooter";
+import MyHeader from "./components/MyHeader";
+import MyList from "./components/MyList";
 
 export default {
-    name: 'App',
-    components: {
-        School,
-        Student
+  name: "App",
+  data() {
+    return {
+      // todos: [],
+      todos: JSON.parse(localStorage.getItem("todos")) || []
+    };
+  },
+  methods: {
+    addTodo(todoObj){
+      // console.log('我是app组件，我收到了数据', todoObj)
+      this.todos.unshift(todoObj)
+    },
+    // 勾选或者取消选择
+    checkTodo(id){
+      this.todos.forEach((todo)=>{
+        if (todo.id === id) todo.done = !todo.done 
+      })
+    },
+    // 删除一个Todo
+    // deleteTodo(id){
+    //   this.todos = this.todos.filter((todo)=>{
+    //     return todo.id !== id
+    //   })
+    // }
+    deleteTodo(id){
+      this.todos = this.todos.filter(todo => todo.id !== id)
+    },
+    checkAllTodo(done){
+      this.todos.forEach((todo)=>{
+        todo.done = done
+      })
+    },
+    clearAllDoneTodo(){
+      this.todos = this.todos.filter((todo)=>{
+        return !todo.done
+      })
+    },
+    updateTodo(id, title){
+      this.todos.forEach((todo)=>{
+        if (todo.id === id) todo.title = title
+      })
     }
-}
+  },
+  watch: {
+    // 简写形式监视不到数组中的done属性（勾选时不生效）
+    // todos(value){
+    //   localStorage.setItem("todos",JSON.stringify(value))
+    // }
+    todos: {
+      deep: true,
+      handler(value){
+        localStorage.setItem("todos",JSON.stringify(value))
+      }
+    }
+  },
+  mounted(){
+    this.$bus.$on('checkTodo',this.checkTodo)
+    this.$bus.$on('checkAllTodo',this.checkAllTodo)
+    this.$bus.$on('deleteTodo',this.deleteTodo)
+    this.$bus.$on('updateTodo',this.updateTodo)
+  },
+  beforeDestroy(){
+    this.$bus.$off('checkTodo')
+    this.$bus.$off('checkAllTodo')
+    this.$bus.$off('deleteTodo')
+    this.$bus.$off('updateTodo')
+  },
+  components: {
+    MyHeader,
+    MyList,
+    MyFooter,
+  },
+};
 </script>
+
+<style>
+body {
+  background: #fff;
+}
+
+.btn {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.btn-danger {
+  color: #fff;
+  background-color: #da4f49;
+  border: 1px solid #bd362f;
+}
+.btn-danger:hover {
+  color: #fff;
+  background-color: #bd362f;
+}
+.btn-edit {
+  color: #fff;
+  background-color: #99ff99;
+  border: 1px solid #afa;
+  margin-right: .5rem;
+}
+.btn-edit:hover {
+  color: #fff;
+  background-color: #88dd88;
+}
+
+.btn:focus {
+  outline: none;
+}
+.todo-container {
+  width: 600px;
+  margin: 0 auto;
+}
+.todo-container .todo-wrap {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+</style>
