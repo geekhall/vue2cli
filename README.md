@@ -34,3 +34,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
    - 子组件 ===> 父组件 通信 （要求父组件先给子组件一个函数）
 3. 使用v-model时要注意：v-model绑定的值不能是props传过来的值，因为props是不可以修改的。
 4. props传过来的若是对象类型的值，修改对象中的属性时Vue不会报错，但不推荐这样做。
+
+
