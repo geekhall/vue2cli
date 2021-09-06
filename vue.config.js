@@ -22,7 +22,8 @@ module.exports = {
                 // changeOrigin: true
             },
             '/foo': {
-                target: '<other_url>'
+                target: 'http://localhost:5002',
+                pathRewrite: {'^/foo':''}
             }
         }
     }
