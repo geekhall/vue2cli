@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <!-- 展示用户列表 -->
-    <div v-show="users.length" class="card" v-for="user in users" :key="user.login">
+    <div v-show="info.users.length" class="card" v-for="user in info.users" :key="user.login">
       <a :href="user.html_url" target="_blank">
         <img :src="user.avatar_url" style="width: 100px" />
       </a>
@@ -9,13 +9,13 @@
     </div>
     
     <!-- 展示欢迎词 -->
-    <h1 v-show="isFirst">欢迎使用！</h1>
+    <h1 v-show="info.isFirst">欢迎使用！</h1>
     
     <!-- 展示加载中 -->
-    <h1 v-show="isLoading">加载中......</h1>
+    <h1 v-show="info.isLoading">加载中......</h1>
 
     <!-- 展示错误 -->
-    <h1 v-show="errMsg">{{errMsg}}</h1>
+    <h1 v-show="info.errMsg">{{info.errMsg}}</h1>
 
   </div>
 </template>
@@ -25,19 +25,22 @@ export default {
   name: "List",
   data() {
     return {
-      isFirst: true,
-      isLoading: false,
-      errMsg: '',
-      users: []
+      info: {
+        isFirst: true,
+        isLoading: false,
+        errMsg: '',
+        users: []
+      }
     };
   },
   mounted() {
-    this.$bus.$on("updateListData", (userObj) => {
-      console.log("我是List组件，收到数据：", userObj);
-      this.isFirst = userObj.isFirst;
-      this.isLoading = userObj.isLoading;
-      this.errMsg = userObj.errMsg;
-      this.users = userObj.users;
+    this.$bus.$on("updateListData", (dataObj) => {
+      console.log("我是List组件，收到数据：", dataObj);
+      this.info = {...this.info, ...dataObj};
+      // this.isFirst = userObj.isFirst;
+      // this.isLoading = userObj.isLoading;
+      // this.errMsg = userObj.errMsg;
+      // this.users = userObj.users;
     });
   },
 };
