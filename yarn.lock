@@ -1876,6 +1876,13 @@
   "resolved" "https://registry.npm.taobao.org/aws4/download/aws4-1.11.0.tgz?cache=0&sync_timestamp=1604101547132&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faws4%2Fdownload%2Faws4-1.11.0.tgz"
   "version" "1.11.0"
 
+"axios@^0.21.3":
+  "integrity" "sha1-+F2bdH+bZtWcpGNgXO3xhEhyuC4="
+  "resolved" "https://registry.nlark.com/axios/download/axios-0.21.3.tgz?cache=0&sync_timestamp=1630782500444&other_urls=https%3A%2F%2Fregistry.nlark.com%2Faxios%2Fdownload%2Faxios-0.21.3.tgz"
+  "version" "0.21.3"
+  dependencies:
+    "follow-redirects" "^1.14.0"
+
 "babel-eslint@^10.1.0":
   "integrity" "sha1-aWjlaKkQt4+zd5zdi2rC9HmUMjI="
   "resolved" "https://registry.npm.taobao.org/babel-eslint/download/babel-eslint-10.1.0.tgz?cache=0&sync_timestamp=1611946213770&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbabel-eslint%2Fdownload%2Fbabel-eslint-10.1.0.tgz"
@@ -4107,7 +4114,7 @@
     "inherits" "^2.0.3"
     "readable-stream" "^2.3.6"
 
-"follow-redirects@^1.0.0":
+"follow-redirects@^1.0.0", "follow-redirects@^1.14.0":
   "integrity" "sha1-atp4EY2NJMruWVWVrM3ArGq9Ai4="
   "resolved" "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.3.tgz"
   "version" "1.14.3"
