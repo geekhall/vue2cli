@@ -22,13 +22,17 @@ export default {
   methods:{
       searchUsers(){
           console.log('search users')
+          // 请求前更新List的数据
+          this.$bus.$emit('updateListData', {isFirst: false, isLoading: true, errMsg:'', users:[]})
           axios.get(`https://api.github.com/search/users?q=${this.keyword}`).then(
               response => {
                   console.log('请求成功了')
-                  this.$bus.$emit('getUsers', response.data.items)
+                //   this.$bus.$emit('updateListData', false, false, '', response.data.items)
+                  this.$bus.$emit('updateListData', {isLoading: false, errMsg:'', users:response.data.items})
               },
               error => {
                   console.log('请求失败了', error.message)
+                  this.$bus.$emit('updateListData', {isLoading: false, errMsg:error.message, users: []})
               }
           )
       }
