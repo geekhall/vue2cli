@@ -27,15 +27,14 @@ export default {
       this.$store.dispatch('addAction', this.n)
     },
     decrement(){
-      this.$store.dispatch('subAction', this.n)
+      // 可以跳过Action，直接调用Mutation中的方法
+      this.$store.commit('subMutation', this.n)
     },
     incrementOdd(){
       this.$store.dispatch('addOddAction', this.n)
     },
     incrementWait(){
-      setTimeout(()=>{
-        this.$store.dispatch('addAction', this.n)
-      }, 500)
+      this.$store.dispatch('addWaitAction', this.n)
     },
   }
 };
