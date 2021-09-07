@@ -12,5 +12,8 @@ export default {
   components: {
     Count,
   },
+  mounted () {
+    console.log('App', this)
+  }
 };
 </script>
