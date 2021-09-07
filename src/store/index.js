@@ -7,13 +7,19 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 // 准备Actions，用于响应组件中的动作
-const actions = {}
+const actions = {
+    addNumber: function () {
+        console.log("actions 中的 addNumber被调用了")
+    }
+}
 
 // 准备mutations，用于操作数据（state）
 const mutations = {}
 
 // 准备state，用于存储数据
-const state = {}
+const state = {
+    sum: 0 // 当前的和
+}
 
 // 创建并暴露store
 export default new Vuex.Store({
@@ -21,4 +27,3 @@ export default new Vuex.Store({
     mutations,
     state
 })
-

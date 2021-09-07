@@ -19,25 +19,22 @@ export default {
   name: "Count",
   data() {
     return {
-      n: 1, 
-      sum: 0
+      n: 1
     }
   },
   methods: {
     increment(){
-      this.sum += this.n
+      this.$store.dispatch('addNumber', this.n)
     },
     decrement(){
-      this.sum -= this.n
+
     },
     incrementOdd(){
-      if (this.sum % 2) {
-        this.sum += this.n
-      }
+      
     },
     incrementWait(){
       setTimeout(()=>{
-        this.sum += this.n
+
       }, 500)
     },
   }
