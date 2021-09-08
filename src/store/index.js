@@ -48,6 +48,10 @@ const mutations = {
     subMutation(state, value) {
         // console.log('mutations 中的 addMutation被调用了', state, value)
         state.sum -= value
+    },
+    addPersonMutation(state, value){
+        console.log('mutations addPersonMutation 被调用了')
+        state.personList.unshift(value)
     }
 }
 
@@ -55,7 +59,12 @@ const mutations = {
 const state = {
     sum: 0, // 当前的和
     school: 'geekhall',
-    subject: 'vue'
+    subject: 'vue',
+    personList: [
+        {id: '001', name: '小沈阳'},
+        {id: '002', name: '赵四'},
+        {id: '003', name: '宋小宝'}
+    ]
 }
 
 // getters，用于将state中的数据进行加工

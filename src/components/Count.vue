@@ -5,6 +5,7 @@
     <!-- <h2>放大十倍为：{{$store.getters.bigSum}}</h2> -->
     <h2>放大十倍为：{{bigSum}}</h2>
     <h2>learn {{subject}} at {{school}}</h2>
+    <h3 style="color:red">Person组件的总人数是：{{personList.length}}</h3>
     <select v-model.number="n">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -61,13 +62,13 @@ export default {
 
 
     // 借助mapActions生成对应的方法，方法中会调用dispatch去联系actions（对象写法）
-    // ...mapActions({incrementOdd: 'addOddAction', incrementWait: 'addWaitAction'})
+    ...mapActions({incrementOdd: 'addOddAction', incrementWait: 'addWaitAction'})
 
     // 借助mapActions生成对应的方法，方法中会调用dispatch去联系actions（数组写法）
     // 调用处需要修改为数组中生成的函数名。
     // <button @click="addOddAction(n)">当前求和为奇数再加</button>
     // <button @click="addWaitAction(n)">等一等再加</button>
-    ...mapActions(['addOddAction', 'addWaitAction'])
+    // ...mapActions(['addOddAction', 'addWaitAction'])
   },
   computed: {
     // he(){
@@ -84,7 +85,7 @@ export default {
     // ...mapState({he:'sum', xuexiao:'school', xueke:'subject'}),
 
     // 第二种方式：要求生成的计算属性名和state中的属性名一致。（数组写法）
-    ...mapState(['sum','school', 'subject']),
+    ...mapState(['sum','school', 'subject', 'personList']),
 
     // bigSum(){
     //   return this.$store.getters.bigSum
