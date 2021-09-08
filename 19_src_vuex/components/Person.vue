@@ -21,10 +21,10 @@ export default {
   },
   computed: {
       personList(){
-          return this.$store.state.personModule.personList
+          return this.$store.state.personList
       },
       sum(){
-          return this.$store.state.countModule.sum
+          return this.$store.state.sum;
       }
   },
   methods: {
