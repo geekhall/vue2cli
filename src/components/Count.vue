@@ -11,16 +11,16 @@
       <option value="3">3</option>
       <option value="4">4</option>
     </select>
-    <button @click="increment">+</button>
-    <button @click="decrement">-</button>
-    <button @click="incrementOdd">当前求和为奇数再加</button>
-    <button @click="incrementWait">等一等再加</button>
+    <button @click="increment(n)">+</button>
+    <button @click="decrement(n)">-</button>
+    <button @click="incrementOdd(n)">当前求和为奇数再加</button>
+    <button @click="incrementWait(n)">等一等再加</button>
   </div>
 </template>
 
 <script>
 
-import {mapState, mapGetters} from 'vuex'
+import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
 
 export default {
   name: "Count",
@@ -30,19 +30,44 @@ export default {
     }
   },
   methods: {
-    increment(){
-      this.$store.dispatch('addAction', this.n)
-    },
-    decrement(){
-      // 可以跳过Action，直接调用Mutation中的方法
-      this.$store.commit('subMutation', this.n)
-    },
-    incrementOdd(){
-      this.$store.dispatch('addOddAction', this.n)
-    },
-    incrementWait(){
-      this.$store.dispatch('addWaitAction', this.n)
-    },
+    // increment(){
+    //   // 可以跳过Action，直接调用Mutation中的方法
+    //   this.$store.commit('addMutation', this.n)
+    // },
+    // decrement(){
+    //   // 可以跳过Action，直接调用Mutation中的方法
+    //   this.$store.commit('subMutation', this.n)
+    // },
+    // 借助mapMutations生成对应的方法，方法中会调用commit去联系mutations（对象写法）
+    // 这里需要注意的是调用的地方需要加上括号传入参数n，否则会将默认的MouseEvent传入。
+    // decrement(){
+    //   this.decrementMapped(this.n)
+    // },
+    // ...mapMutations({increment:'addMutation', decrementMapped:'subMutation'}),
+    ...mapMutations({increment:'addMutation', decrement:'subMutation'}),
+    // 借助mapMutations生成对应的方法，方法中会调用commit去联系mutations（数组写法）
+    // 要求名字相同全大写
+    // ...mapMutations(['addMutation', 'subMutation']),
+
+
+
+
+    // incrementOdd(){
+    //   this.$store.dispatch('addOddAction', this.n)
+    // },
+    // incrementWait(){
+    //   this.$store.dispatch('addWaitAction', this.n)
+    // },
+
+
+    // 借助mapActions生成对应的方法，方法中会调用dispatch去联系actions（对象写法）
+    // ...mapActions({incrementOdd: 'addOddAction', incrementWait: 'addWaitAction'})
+
+    // 借助mapActions生成对应的方法，方法中会调用dispatch去联系actions（数组写法）
+    // 调用处需要修改为数组中生成的函数名。
+    // <button @click="addOddAction(n)">当前求和为奇数再加</button>
+    // <button @click="addWaitAction(n)">等一等再加</button>
+    ...mapActions(['addOddAction', 'addWaitAction'])
   },
   computed: {
     // he(){
