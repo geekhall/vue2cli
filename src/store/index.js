@@ -67,7 +67,11 @@ const countOptions = {
 const personOptions = {
     namespaced:true,
     actions: {
-
+        addPersionWang(context, value){
+            if (value.name.indexOf('王') === 0) {
+                context.commit('addPersonMutation', value)
+            }
+        }
     },
     mutations: {
         addPersonMutation(state, value) {
@@ -91,7 +95,9 @@ const personOptions = {
         ]
     },
     getters: {
-
+        firstPersonName(state){
+            return state.personList[0].name
+        }
     }
 }
 
