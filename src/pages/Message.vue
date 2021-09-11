@@ -12,7 +12,7 @@
         <!-- <router-link :to="{
             // path:'/home/message/detail',
             // 使用命名路由 
-            name:'xq',
+            name:'detail',
             query: {
                 id:m.id,
                 title:m.title
@@ -22,18 +22,21 @@
         </router-link> -->
         <!-- 跳转路由并携带params参数，to的对象写法 -->
         <!-- 这里需要注意的是params路由不能使用path，必须使用name方式 -->
-        <router-link :to="{
+        <router-link
+          :to="{
             // path:'/home/message/detail',     // error！
-            // 使用命名路由 
-            name:'xq',
+            // 使用命名路由
+            name: 'detail',
             params: {
-                id:m.id,
-                title:m.title
-            }
-        }">
-            {{m.title}}
+              id: m.id,
+              title: m.title,
+            },
+          }"
+        >
+          {{ m.title }}
         </router-link>
-        
+        <button @click="pushShow(m)">push查看</button>
+        <button @click="replaceShow(m)">replace查看</button>
       </li>
     </ul>
     <hr />
@@ -52,6 +55,27 @@ export default {
         { id: "003", title: "消息0003" },
       ],
     };
+  },
+  methods: {
+    pushShow(m) {
+      // console.log(m)
+      this.$router.push({
+        name: "detail",
+        params: {
+          id: m.id,
+          title: m.title,
+        },
+      });
+    },
+    replaceShow(m) {
+      this.$router.replace({
+        name: "detail",
+        params: {
+          id: m.id,
+          title: m.title,
+        },
+      });
+    },
   },
 };
 </script>
